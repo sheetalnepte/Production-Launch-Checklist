@@ -1,19 +1,19 @@
 table#plc tr {
-    border-bottom: 1px solid #CCC;
+  border-bottom: 1px solid #ccc;
 }
 
 table#plc tr.ok {
-    background-color: #e5ffe2;
+  background-color: #e5ffe2;
 }
 
 table#plc tr.warning {
-    background-color: #fffce5;
+  background-color: #fffce5;
 }
 
 table#plc tr.info {
-    background-color: #bdf;
+  background-color: #bdf;
 }
 
 table#plc tr.error {
-    background-color: #FFE6E6;
+  background-color: #ffe6e6;
 }

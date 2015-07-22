@@ -8,7 +8,7 @@
 /**
  * Main callback function().
  *
- * @return type
+ * @return string
  */
 function _plc_summary() {
   $plc_modules = _plc_disable_module_list();
@@ -24,49 +24,57 @@ function _plc_summary() {
 }
 
 /**
- * Function will hold module list to be disabled
+ * Function will hold module list to be disabled.
  *
- * @return array
+ * @return string
  */
 function _plc_disable_module_list() {
   $plc_modules = array();
   $plc_modules = array(
-    'dblog' => array('data' => array(
+    'dblog' => array(
+      'data' => array(
         t('Watchdog Module'),
         t('Watchdog Module'),
       ),
     ),
-    'devel' => array('data' => array(
+    'devel' => array(
+      'data' => array(
         t('Devel'),
         t('Development Module'),
       ),
     ),
-    'coder' => array('data' => array(
+    'coder' => array(
+      'data' => array(
         t('Coder'),
         t('Coding Standard and review Module'),
       ),
     ),
-    'views_ui' => array('data' => array(
+    'views_ui' => array(
+      'data' => array(
         t('Views UI'),
         t('UI to build Views'),
       ),
     ),
-    'feeds_ui' => array('data' => array(
+    'feeds_ui' => array(
+      'data' => array(
         t('Feeds UI'),
         t('UI to build feeds'),
       ),
     ),
-    'field_ui' => array('data' => array(
+    'field_ui' => array(
+      'data' => array(
         t('Field UI'),
         t('UI to manage field'),
       ),
     ),
-    'queue_ui' => array('data' => array(
+    'queue_ui' => array(
+      'data' => array(
         t('Queue UI'),
         t('UI to manage Queue'),
       ),
     ),
-    'context_ui' => array('data' => array(
+    'context_ui' => array(
+      'data' => array(
         t('Context UI'),
         t('UI to manage Context'),
       ),
@@ -98,14 +106,16 @@ function _plc_disable_module_list() {
 
 /**
  *
- * @return type count
+ * @return array count
  */
 function _plc_get_watchdog_count() {
   $count_query = db_select('watchdog', 'w')->fields('w');
   $result = $count_query->execute()->rowCount();
-  if (count($result) > 0) $watchdog_msg = t("Please clear the !url, current count : @result",
+  if (count($result) > 0) {
+    $watchdog_msg = t("Please clear the !url, current count : @result",
     array('!url' => l(t('watchdog'), "admin/reports/dblog"), '@result' => $result)
-  );
+    );
+  }
   else {
     $watchdog_msg = t("Watchdog is empty.");
   }
@@ -114,9 +124,9 @@ function _plc_get_watchdog_count() {
 
 /**
  *
- * @param type $plc_data
+ * @param array $plc_data
  *
- * @return type
+ * @return string
  */
 function _plc_data_summary($plc_data) {
   $header = array(
@@ -134,7 +144,7 @@ function _plc_data_summary($plc_data) {
  * @global type $cookie_domain
  * @global type $update_free_access
  *
- * @return type
+ * @return string
  */
 function _plc_system_variables_list() {
   global $conf;
@@ -264,11 +274,15 @@ function _plc_system_variables_list() {
   $table_attributes = array('id' => 'plc');
 
   $output = "<h2>System Variables: </h2>";
-  $output .= theme('table', array('header' => $header1, 'rows' => $plc_variables,
+  $output .= theme('table', array(
+  'header' => $header1,
+  'rows' => $plc_variables,
       'attributes' => $table_attributes,
     ));
   $output .= "<h2>Performance and scalability configuration: </h2>";
-  $output .= theme('table', array('header' => $header2, 'rows' => $plc_performance,
+  $output .= theme('table', array(
+  'header' => $header2,
+  'rows' => $plc_performance,
       'attributes' => $table_attributes,
     ));
 
@@ -277,9 +291,9 @@ function _plc_system_variables_list() {
 
 /**
  *
- * @param type $var
+ * @param array $var
  *
- * @return type
+ * @return array
  */
 function _plc_not_configured($var) {
   foreach ($var as $k => $v) {
@@ -299,9 +313,9 @@ function _plc_not_configured($var) {
 
 /**
  *
- * @param type $var
+ * @param array $var
  *
- * @return string
+ * @return array
  */
 function _plc_table_row_class($var) {
   foreach ($var as $k => $v) {
@@ -321,4 +335,3 @@ function _plc_table_row_class($var) {
 
   return $var;
 }
-
