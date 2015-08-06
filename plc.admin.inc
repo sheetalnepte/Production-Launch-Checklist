@@ -9,6 +9,7 @@
  * Main callback function().
  *
  * @return string
+ *   Returns output for the page.
  */
 function _plc_summary() {
   $plc_modules = _plc_disable_module_list();
@@ -27,6 +28,7 @@ function _plc_summary() {
  * Function will hold module list to be disabled.
  *
  * @return string
+ *    Returns list of modules.
  */
 function _plc_disable_module_list() {
   $plc_modules = _plc_get_recommend_disable_module();
@@ -50,21 +52,28 @@ function _plc_disable_module_list() {
   $table_attributes = array('id' => 'plc');
 
   $output = "<h2>Module need to be disabled: </h2>";
-  $output .= theme('table', array('header' => $header, 'rows' => $plc_modules, 'attributes' => $table_attributes));
+  $output .= theme('table', array(
+    'header' => $header,
+    'rows' => $plc_modules,
+    'attributes' => $table_attributes,
+    ));
   return $output;
 }
 
 /**
+ * Function will check for the errors in db.
  *
  * @return array count
+ *    Returns watchdog count.
  */
 function _plc_get_watchdog_count() {
   $count_query = db_select('watchdog', 'w')->fields('w');
   $result = $count_query->execute()->rowCount();
   if (count($result) > 0) {
-    $watchdog_msg = t("Please clear the !url, current count : @result",
-      array('!url' => l(t('watchdog'), "admin/reports/dblog"), '@result' => $result)
-    );
+    $watchdog_msg = t("Please clear the !url, current count : @result", array(
+      '!url' => l(t('watchdog'), "admin/reports/dblog"),
+      '@result' => $result,
+      ));
   }
   else {
     $watchdog_msg = t("Watchdog is empty.");
@@ -73,12 +82,15 @@ function _plc_get_watchdog_count() {
 }
 
 /**
+ * Outputs data summary in table format.
  *
  * @param array $plc_data
+ *    Contains processed data.
  *
  * @return string
+ *    Returns output for the page.
  */
-function _plc_data_summary($plc_data) {
+function _plc_data_summary(array $plc_data) {
   $header = array(
     'Data',
     'Description',
@@ -89,8 +101,10 @@ function _plc_data_summary($plc_data) {
 }
 
 /**
+ * Reads system configuration and recommends the settings.
  *
  * @return string
+ *   Returns output for the page.
  */
 function _plc_system_variables_list() {
   $plc_variables = _plc_get_environment_variables();
@@ -132,12 +146,15 @@ function _plc_system_variables_list() {
 }
 
 /**
+ * Displays value based of configuration.
  *
  * @param array $var
+ *   Contains the environament variables data.
  *
  * @return array
+ *   Returns array with appropriate values.
  */
-function _plc_not_configured($var) {
+function _plc_not_configured(array $var) {
   foreach ($var as $k => $v) {
     if ($v['data']['#value'] !== 0 && $v['data']['#value'] === FALSE) {
       $var[$k]['data']['#value'] = t('FALSE');
@@ -154,12 +171,15 @@ function _plc_not_configured($var) {
 }
 
 /**
+ * Apply CSS class based on the values.
  *
  * @param array $var
+ *   Contains the environament variables data.
  *
  * @return array
+ *   Returns array with appropriate CSS class.
  */
-function _plc_table_row_class($var) {
+function _plc_table_row_class(array $var) {
   foreach ($var as $k => $v) {
     if ($v['data']['#value'] === "" || $v['data']['#value'] == NULL) {
       $var[$k]['class'] = array('error');

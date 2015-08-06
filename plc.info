@@ -3,5 +3,3 @@ description = An interactive checklist of Production Launch Activity for Drupal.
 core = 7.x
 package = Development
 ;configure = admin/config/development/plc
-
-version = "7.x-1.0"

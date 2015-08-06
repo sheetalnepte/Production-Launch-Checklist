@@ -2,11 +2,14 @@
 
 /**
  * @file
+ * File contains construction of arrays.
  */
 
 /**
+ * List of modules to be disabled.
  *
  * @return array
+ *    Returns module list.
  */
 function _plc_get_recommend_disable_module() {
   $plc_modules = array(
@@ -64,12 +67,14 @@ function _plc_get_recommend_disable_module() {
 }
 
 /**
+ * Constructs environment variable array.
  *
  * @global type $conf
  * @global type $cookie_domain
  * @global type $update_free_access
  *
  * @return array
+ *    Returns variable list.
  */
 function _plc_get_environment_variables() {
   global $conf;
@@ -181,10 +186,12 @@ function _plc_get_environment_variables() {
 }
 
 /**
+ * Constructs performance variable array.
  *
  * @global type $conf
  *
  * @return array
+ *    Returns varibale list.
  */
 function _plc_get_performance_variables() {
   global $conf;
